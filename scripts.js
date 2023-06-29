@@ -9,15 +9,46 @@ function generateBoard(size) {
     // Először töröljük a játéktábla tartalmát
     gameBoardDiv.innerHTML = '';
 
+    // Létrehozzuk a sor- és oszlopszámokat
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const topRow = document.createElement('div');
+    const bottomRow = document.createElement('div');
+    topRow.classList.add('row');
+    bottomRow.classList.add('row');
+    for (let i = 0; i < size; i++) {
+        const topCell = document.createElement('div');
+        const bottomCell = document.createElement('div');
+        topCell.classList.add('cell', 'label');
+        bottomCell.classList.add('cell', 'label');
+        topCell.textContent = bottomCell.textContent = letters[i];
+        topRow.appendChild(topCell);
+        bottomRow.appendChild(bottomCell);
+    }
+    gameBoardDiv.appendChild(topRow);
+
     // Létrehozzuk a cellákat
-    for (let i = 0; i < size * size; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-        gameBoardDiv.appendChild(cell);
+    for (let i = 0; i < size; i++) {
+        const row = document.createElement('div');
+        row.classList.add('row');
+        const leftCell = document.createElement('div');
+        const rightCell = document.createElement('div');
+        leftCell.classList.add('cell', 'label');
+        rightCell.classList.add('cell', 'label');
+        leftCell.textContent = rightCell.textContent = i + 1;
+        row.appendChild(leftCell);
+        for (let j = 0; j < size; j++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            row.appendChild(cell);
+        }
+        row.appendChild(rightCell);
+        gameBoardDiv.appendChild(row);
     }
 
+    gameBoardDiv.appendChild(bottomRow);
+
     // Beállítjuk a játéktábla szélességét a cellák száma alapján
-    gameBoardDiv.style.width = `${size * 110}px`;
+    gameBoardDiv.style.width = `${(size + 2) * 100}px`; // Itt módosítottam a szélességet
 }
 
 // A játék indítása gomb eseménykezelője
@@ -32,20 +63,3 @@ startGameButton.addEventListener('click', () => {
     // (Ezt majd az index.js fájlban fogjuk kezelni)
     console.log(`A játékmód: ${gameMode}`);
 });
-
-
-// A játéktábla generálása
-function generateBoard(size) {
-    // Először töröljük a játéktábla tartalmát
-    gameBoardDiv.innerHTML = '';
-
-    // Létrehozzuk a cellákat
-    for (let i = 0; i < size * size; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-        gameBoardDiv.appendChild(cell);
-    }
-
-    // Beállítjuk a játéktábla szélességét a cellák száma alapján
-    gameBoardDiv.style.width = `${size * 110}px`; // Itt módosítottam a szélességet
-}
