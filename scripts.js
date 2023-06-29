@@ -3,11 +3,14 @@ const boardSizeSelect = document.getElementById('board-size');
 const gameModeSelect = document.getElementById('game-mode');
 const startGameButton = document.getElementById('start-game');
 const gameBoardDiv = document.getElementById('game-board');
+const feedbackDiv = document.getElementById('feedback');
+const restartGameButton = document.getElementById('restart-game');
 
 // A játéktábla generálása
 function generateBoard(size) {
-    // Először töröljük a játéktábla tartalmát
+    // Először töröljük a játéktábla és a 'feedback' (visszajelzés) tartalmát
     gameBoardDiv.innerHTML = '';
+    feedbackDiv.innerHTML = '';
 
     // Létrehozzuk a sor- és oszlopszámokat
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -48,7 +51,14 @@ function generateBoard(size) {
     gameBoardDiv.appendChild(bottomRow);
 
     // Beállítjuk a játéktábla szélességét a cellák száma alapján
-    gameBoardDiv.style.width = `${(size + 2) * 100}px`; // Itt módosítottam a szélességet
+    gameBoardDiv.style.width = `${(size + 2) * 100}px`;
+}
+
+// Visszajelzés generálása
+function updateFeedback(message) {
+    const p = document.createElement('p');
+    p.textContent = message;
+    feedbackDiv.appendChild(p);
 }
 
 // A játék indítása gomb eseménykezelője
@@ -59,7 +69,23 @@ startGameButton.addEventListener('click', () => {
     // A játéktábla generálása
     generateBoard(boardSize);
 
+    // A visszajelzés frissítése
+    updateFeedback(`A játékmód: ${gameMode}`);
+
     // A játékmód beállítása
     // (Ezt majd az index.js fájlban fogjuk kezelni)
     console.log(`A játékmód: ${gameMode}`);
-});
+}
+);
+
+// A játék újraindítása
+restartGameButton.addEventListener('click', () => {
+    // A játéktábla és a visszajelzés div tartalmának törlése
+    gameBoardDiv.innerHTML = '';
+    feedbackDiv.innerHTML = '';
+
+    // A játékmód és a játéktér méretének visszaállítása az alapértelmezett értékekre
+    gameModeSelect.value = 'huhu';
+    boardSizeSelect.value = '3';
+}
+);
