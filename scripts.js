@@ -17,7 +17,7 @@ function generateBoard(size) {
     }
 
     // Beállítjuk a játéktábla szélességét a cellák száma alapján
-    gameBoardDiv.style.width = `${size * 100}px`;
+    gameBoardDiv.style.width = `${size * 110}px`;
 }
 
 // A játék indítása gomb eseménykezelője
@@ -32,3 +32,20 @@ startGameButton.addEventListener('click', () => {
     // (Ezt majd az index.js fájlban fogjuk kezelni)
     console.log(`A játékmód: ${gameMode}`);
 });
+
+
+// A játéktábla generálása
+function generateBoard(size) {
+    // Először töröljük a játéktábla tartalmát
+    gameBoardDiv.innerHTML = '';
+
+    // Létrehozzuk a cellákat
+    for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        gameBoardDiv.appendChild(cell);
+    }
+
+    // Beállítjuk a játéktábla szélességét a cellák száma alapján
+    gameBoardDiv.style.width = `${size * 110}px`; // Itt módosítottam a szélességet
+}
