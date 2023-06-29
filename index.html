@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+
+    <div id="game-options">
+        <label for="board-size">Játéktér mérete:</label>
+        <select id="board-size">
+            <option value="3">3x3</option>
+            <option value="5">5x5</option>
+            <option value="9">9x9</option>
+        </select>
+
+        <label for="game-mode">Játékmód:</label>
+        <select id="game-mode">
+            <option value="huhu">Ember vs Ember</option>
+            <option value="huai">Ember vs AI</option>
+            <option value="aiai">AI vs AI</option>
+        </select>
+
+        <button id="start-game">Játék indítása</button>
+    </div>
+
+    <div id="game-board">
+        <!-- A játéktábla cellái JavaScript segítségével lesznek generálva -->
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
