@@ -8,6 +8,7 @@ const restartGameButton = document.getElementById('restart-game');
 const moveInput = document.getElementById('move');
 const submitMoveButton = document.getElementById('submit-move');
 
+const boardArray = []
 // A játéktábla generálása
 function generateBoard(size) {
     // Először töröljük a játéktábla és a 'feedback' (visszajelzés) tartalmát
@@ -20,6 +21,7 @@ function generateBoard(size) {
     const bottomRow = document.createElement('div');
     topRow.classList.add('row');
     bottomRow.classList.add('row');
+    console.log(size) 
     for (let i = 0; i < size; i++) {
         const topCell = document.createElement('div');
         const bottomCell = document.createElement('div');
@@ -30,7 +32,7 @@ function generateBoard(size) {
         bottomRow.appendChild(bottomCell);
     }
     gameBoardDiv.appendChild(topRow);
-
+    let count = 0;
     // Létrehozzuk a cellákat
     for (let i = 0; i < size; i++) {
         const row = document.createElement('div');
@@ -43,8 +45,10 @@ function generateBoard(size) {
         row.appendChild(leftCell);
         for (let j = 0; j < size; j++) {
             const cell = document.createElement('div');
-            cell.classList.add('cell');
+            cell.classList.add('cell', 'count');
             row.appendChild(cell);
+            boardArray.push(count)
+            count++
         }
         row.appendChild(rightCell);
         gameBoardDiv.appendChild(row);
@@ -70,7 +74,7 @@ startGameButton.addEventListener('click', () => {
 
     // A játéktábla generálása
     generateBoard(boardSize);
-
+    console.log(boardArray)
     // A visszajelzés frissítése
     updateFeedback(`A játékmód: ${gameMode}`);
 
