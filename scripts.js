@@ -5,6 +5,8 @@ const startGameButton = document.getElementById('start-game');
 const gameBoardDiv = document.getElementById('game-board');
 const feedbackDiv = document.getElementById('feedback');
 const restartGameButton = document.getElementById('restart-game');
+const moveInput = document.getElementById('move');
+const submitMoveButton = document.getElementById('submit-move');
 
 // A játéktábla generálása
 function generateBoard(size) {
@@ -89,3 +91,19 @@ restartGameButton.addEventListener('click', () => {
     boardSizeSelect.value = '3';
 }
 );
+
+// A lépés kezelése
+function handleMove() {
+    const move = moveInput.value;
+    // Itt kezeld le a lépést
+    console.log(`A játékos lépése: ${move}`);
+}
+
+// Felhasználó beviteli mező
+submitMoveButton.addEventListener('click', handleMove);
+
+moveInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        handleMove();
+    }
+});
